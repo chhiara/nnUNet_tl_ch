@@ -485,3 +485,7 @@ for the process to work.
 <img src="HI_Logo.png" width="512px" />
 
 nnU-Net is developed and maintained by the Applied Computer Vision Lab (ACVL) of [Helmholtz Imaging](http://helmholtz-imaging.de).
+
+# WIP
+WIP Transfer learning with weight freezing
+
