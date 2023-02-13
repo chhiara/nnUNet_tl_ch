@@ -1,9 +1,8 @@
 from batchgenerators.utilities.file_and_folder_operations import *
 import numpy as np
 from nnunet.paths import preprocessing_output_dir
-task_name = 'Task601__AF_L__T1__TractoInferno'
+task_name = 'Task601__T1__AF_L__TractoInferno'
 
-#TODO
 # make sure to run the Task601 dataset conversion and
 # nnUNet_plan_and_preprocess first!
 plans_fname = join(preprocessing_output_dir, task_name, 'nnUNetPlansv2.1_plans_3D.pkl')
