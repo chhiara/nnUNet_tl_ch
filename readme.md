@@ -487,6 +487,7 @@ for the process to work.
 nnU-Net is developed and maintained by the Applied Computer Vision Lab (ACVL) of [Helmholtz Imaging](http://helmholtz-imaging.de).
 
 # Transfer learning
+*Added by ghezzis*
 The original repo was modified in order to support transfer learning, that is the freezing of some specific layers of the net after an initial training, also changing the learning rate.
 
 In particular, in nnunet > training > network_training > frozen you can find the custom trainers that were created for this project.
