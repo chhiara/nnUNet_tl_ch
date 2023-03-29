@@ -488,18 +488,19 @@ nnU-Net is developed and maintained by the Applied Computer Vision Lab (ACVL) of
 
 # Transfer learning
 *Added by ghezzis*
+
 The original repo was modified in order to support transfer learning, that is the freezing of some specific layers of the net after an initial training, also changing the learning rate.
 
-In particular, in nnunet > training > network_training > frozen you can find the custom trainers that were created for this project.
+In particular, in *nnunet > training > network_training > frozen* you can find the custom trainers that were created for this project.
 
-If you need to a custom trainer (for example, you want to change the architecture, learning rate, freeze some layers, update strategy, number of epochs etc), you can simply add a new class in this folder. The class should extend from *nnUNetTrainerV2* and you can overwrite the methods of the class to best suit you needs.
+If you need to a custom trainer (for example, you want to change the architecture, learning rate, freeze some layers, update strategy, number of epochs etc), you can simply add a new class in this folder. The class should extend *nnUNetTrainerV2* and you can overwrite its methods to best suit you needs.
 
 Hereafter, the ones that were created:
-- *nnUNetTrainerV2_800epochs* modifies only the number of epochs in the init file and changes the number of splits performed (from 5 to 3)
-- *nnUNetTrainerTransferLearning* modifies the number of epochs and the initial learning rate in the init method (*__init__*) as well as the number of splits (*do_splits*). Then, it saves the architecture as onnx file (*plot_network_architecture*). Also, it freezes the layers in the encoding layers of the net and leaves the decoding layers free (parameter *requires_grad* means that that layers require gradient update) in *run_training*.
+- *nnUNetTrainerV2_800epochs* only modifies the number of epochs in the init method and changes the number of splits performed (from 5 to 3)
+- *nnUNetTrainerTransferLearning* modifies the number of epochs and the initial learning rate in the init method (*__init__*) as well as the number of splits (*do_splits*). Then, it saves the architecture as onnx file (*plot_network_architecture*). Also, it freezes the layers in the encoding part of the network and leaves the decoding layers free (parameter *requires_grad* means that that layers require gradient update) in *run_training*.
 - *nnUNetTrainerTransferLearning_lr3* has a different learning rate wrt *nnUNetTrainerTransferLearning*
 
-Therefore, an example of transfer learning could be from dataset source to dataset target (using our classes):
+Therefore, an example of transfer learning from dataset source to dataset target could be (using our classes):
  
 ```python
 
@@ -508,7 +509,7 @@ task_source = "Task501__source"
 task_target = "Task502__target"
 
 # trainers
-trainer= "nnUNetTrainerV2_800epochs"
+trainer = "nnUNetTrainerV2_800epochs"
 transfer_learning_trainer = "nnUNetTrainerTransferLearning"
 
 # paths to plans and models 
@@ -516,14 +517,14 @@ transfer_learning_trainer = "nnUNetTrainerTransferLearning"
 plans_from_target = "nnUNet_dataset/nnUNet_preprocessed/" + task_target + "/nnUNetPlansv2.1_plans_3D.pkl"
 path_to_final_checkpoint = "nnUNet_dataset/nnUNet_trained_models/nnUNet/3d_fullres/" + task_source + "/nnUNetTrainerV2_800epochs__nnUNetPlans_pretrained_my_t2_plans/all/model_best.model"
 
-# run planning and preprocessing for target dataset
+# run planning and preprocessing for target dataset and then for source using target plans
 os.system(f"nnUNet_plan_and_preprocess -t {task_target}")
 os.system(f"nnUNet_plan_and_preprocess -t {task_source} -pl3d ExperimentPlanner3D_v21_Pretrained -overwrite_plans {plans_from_target} -overwrite_plans_identifier my_t2_plans")
 
 # train on the whole source training dataset in order to have the initial weights for retrainig / transfer learning
 os.system(f"nnUNet_train 3d_fullres {trainer} {task_source} all -p nnUNetPlans_pretrained_my_t2_plans ")
 
-# transfer learning
+# transfer learning on target dataset
 os.system(f"nnUNet_train 3d_fullres {transfer_learning_trainer} {task_target}  -pretrained_weights {path_to_final_checkpoint}  0 --npz")
 os.system(f"nnUNet_train 3d_fullres {transfer_learning_trainer} {task_target}  -pretrained_weights {path_to_final_checkpoint}  1 --npz")
 os.system(f"nnUNet_train 3d_fullres {transfer_learning_trainer} {task_target}  -pretrained_weights {path_to_final_checkpoint}  2 --npz")
@@ -534,4 +535,4 @@ os.system(f"nnUNet_train 3d_fullres {transfer_learning_trainer} {task_target}  -
 ## Files for editing plans and splits
 In nnunet > experiment_planning there are scripts that can be run in order to change:
 - plans, so that custom batch and patch sizes are used
-- splits, so that you can modify the plans in nnUNet_preprocessed_ > *task* > splits_final.pkl and change from 5-fold CV to 3-fold
+- splits, so that you can modify the plans in nnUNet_preprocessed_ > *task* > splits_final.pkl and change from 5 folds to 3.
