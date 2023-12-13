@@ -3,29 +3,42 @@ import numpy as np
 from nnunet.paths import preprocessing_output_dir
 
 tasks = [
-    # "Task531__peaks__OR-left__BrainPTM",
-    # "Task532__T1__IFOF_L__TractoInferno",
-    # "Task533__T1__ILF_L__TractoInferno",
-    #"Task534__T1__UF_L__TractoInferno",
-    # "Task535__AP__IFOF_L__TractoInferno",
-    # "Task536__AP__ILF_L__TractoInferno",
-    #"Task537__AP__UF_L__TractoInferno",
-    # "Task538__peaks__IFOF_L__TractoInferno",
-    # "Task539__peaks__ILF_L__TractoInferno",
-    #"Task540__peaks__UF_L__TractoInferno",
-    # "Task541__T1__IFOF_L__Apss",
-    # "Task542__T1__ILF_L__Apss",
-    # "Task543__T1__UF_L__Apss",
-    # "Task544__AP__IFOF_L__Apss",
-    # "Task545__AP__ILF_L__Apss",
-    # "Task546__AP__UF_L__Apss",
-    # "Task547__peaks__IFOF_L__Apss",
-    # "Task548__peaks__ILF_L__Apss",
-    # "Task549__peaks__UF_L__Apss"
-    "Task519__peaks__AF_L__Apss",
-    "Task511__AP__AF_L__Apss",
-    "Task512__AP__FAT_L__Apss",
-    "Task520__peaks__FAT_L__Apss"
+    # "Task707__T1__ILF_L__TractoInferno",
+    # "Task708__AP__ILF_L__TractoInferno",
+    # "Task709__peaks__ILF_L__TractoInferno",
+    # "Task704__T1__IFOF_L__TractoInferno",
+    # "Task705__AP__IFOF_L__TractoInferno",
+    # "Task706__peaks__IFOF_L__TractoInferno",
+    # "Task740__T1__ILF_L__fold_0__Apss__TractoDim",
+    # "Task741__T1__ILF_L__fold_1__Apss__TractoDim",
+    # "Task742__T1__ILF_L__fold_2__Apss__TractoDim",
+    # "Task743__T1__ILF_L__fold_3__Apss__TractoDim",
+    # "Task744__T1__ILF_L__fold_4__Apss__TractoDim",
+    #     "Task745__AP__ILF_L__fold_0__Apss__TractoDim",
+    # "Task746__AP__ILF_L__fold_1__Apss__TractoDim",
+    # "Task747__AP__ILF_L__fold_2__Apss__TractoDim",
+    # "Task748__AP__ILF_L__fold_3__Apss__TractoDim",
+    # "Task749__AP__ILF_L__fold_4__Apss__TractoDim",
+    #     "Task750__peaks__ILF_L__fold_0__Apss__TractoDim",
+    # "Task751__peaks__ILF_L__fold_1__Apss__TractoDim",
+    # "Task752__peaks__ILF_L__fold_2__Apss__TractoDim",
+    # "Task753__peaks__ILF_L__fold_3__Apss__TractoDim",
+    # "Task754__peaks__ILF_L__fold_4__Apss__TractoDim",
+    # "Task725__T1__IFOF_L__fold_0__Apss__TractoDim",
+    # "Task726__T1__IFOF_L__fold_1__Apss__TractoDim",
+    # "Task727__T1__IFOF_L__fold_2__Apss__TractoDim",
+    # "Task728__T1__IFOF_L__fold_3__Apss__TractoDim",
+    # "Task729__T1__IFOF_L__fold_4__Apss__TractoDim",
+    #     "Task730__AP__IFOF_L__fold_0__Apss__TractoDim",
+    # "Task731__AP__IFOF_L__fold_1__Apss__TractoDim",
+    # "Task732__AP__IFOF_L__fold_2__Apss__TractoDim",
+    # "Task733__AP__IFOF_L__fold_3__Apss__TractoDim",
+    # "Task734__AP__IFOF_L__fold_4__Apss__TractoDim",
+    #     "Task735__peaks__IFOF_L__fold_0__Apss__TractoDim",
+    # "Task736__peaks__IFOF_L__fold_1__Apss__TractoDim",
+    # "Task737__peaks__IFOF_L__fold_2__Apss__TractoDim",
+    # "Task738__peaks__IFOF_L__fold_3__Apss__TractoDim",
+    # "Task739__peaks__IFOF_L__fold_4__Apss__TractoDim",
 ]
 
 for task_name in tasks:
@@ -39,6 +52,7 @@ for task_name in tasks:
 
     nr_splits = 3
     new_splits=[]
+    print(len(splits))
     if(len(splits) == 5):
         
         all_images = np.concatenate((splits[0]["val"],splits[0]["train"])).tolist()
