@@ -28,6 +28,7 @@ class nnUNetTrainerV2_200epochs(nnUNetTrainerV2):
         self.init_args = (plans_file, fold, output_folder, dataset_directory, batch_dice, stage, unpack_data,
                         deterministic, fp16)
         self.max_num_epochs = 200
+        
         self.initial_lr = 1e-2
     
     def do_split(self):
