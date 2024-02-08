@@ -330,6 +330,7 @@ class nnUNetTrainerV2(nnUNetTrainer):
         tr_keys.sort()
         val_keys.sort()
         self.dataset_tr = OrderedDict()
+
         for i in tr_keys:
             self.dataset_tr[i] = self.dataset[i]
         self.dataset_val = OrderedDict()

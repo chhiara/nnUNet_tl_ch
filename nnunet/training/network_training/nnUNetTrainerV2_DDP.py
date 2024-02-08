@@ -608,9 +608,9 @@ class nnUNetTrainerV2_DDP(nnUNetTrainerV2):
         if do_mirroring and mirror_axes is None:
             mirror_axes = self.data_aug_params['mirror_axes']
 
-        if do_mirroring:
-            assert self.data_aug_params["do_mirror"], "Cannot do mirroring as test time augmentation when training " \
-                                                      "was done without mirroring"
+        # if do_mirroring:
+        #     assert self.data_aug_params["do_mirror"], "Cannot do mirroring as test time augmentation when training " \
+        #                                               "was done without mirroring"
 
         valid = list((SegmentationNetwork, nn.DataParallel, DDP))
         assert isinstance(self.network, tuple(valid))
