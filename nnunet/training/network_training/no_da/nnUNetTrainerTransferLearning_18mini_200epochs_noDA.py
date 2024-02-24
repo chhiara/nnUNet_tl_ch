@@ -43,7 +43,7 @@ from nnunet.training.loss_functions.deep_supervision import MultipleOutputLoss2
 
 import torch.onnx
 
-class nnUNetTrainerTransferLearning_5mini_200epochs_noDA(nnUNetTrainerV2):
+class nnUNetTrainerTransferLearning_18mini_200epochs_noDA(nnUNetTrainerV2):
     """
     Network Trainer:
     What you need to override:

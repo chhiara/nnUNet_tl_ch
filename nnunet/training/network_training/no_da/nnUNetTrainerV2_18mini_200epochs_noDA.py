@@ -22,7 +22,7 @@ from nnunet.training.dataloading.dataset_loading import unpack_dataset, DataLoad
 from nnunet.training.loss_functions.deep_supervision import MultipleOutputLoss2
 
 
-class nnUNetTrainerV2_5mini_200epochs_noDA(nnUNetTrainerV2):
+class nnUNetTrainerV2_18mini_200epochs_noDA(nnUNetTrainerV2):
 
     def __init__(self, plans_file, fold, output_folder=None, dataset_directory=None, batch_dice=True, stage=None,
                 unpack_data=True, deterministic=True, fp16=False):
